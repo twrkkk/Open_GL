@@ -128,11 +128,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="basic_lighting.fs" />
+    <None Include="basic_lighting.vs" />
     <None Include="dependencies\glut\glut32.dll" />
+    <None Include="lamp.fs" />
+    <None Include="lamp.vs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\glut\glut32.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="rainbow_texture.png" />
+    <Image Include="texture1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="shader_s.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
