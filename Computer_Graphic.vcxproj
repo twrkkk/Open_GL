@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\soil.1.16.0\build\native\soil.props" Condition="Exists('packages\soil.1.16.0\build\native\soil.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -128,11 +129,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="cubeTextSh.fs" />
+    <None Include="cubeTextSh.vs" />
     <None Include="dependencies\glut\glut32.dll" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\glut\glut32.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="cubeTex\back1.jpg" />
+    <Image Include="cubeTex\bottom2.jpg" />
+    <Image Include="cubeTex\front0.jpg" />
+    <Image Include="cubeTex\left4.jpg" />
+    <Image Include="cubeTex\right5.jpg" />
+    <Image Include="cubeTex\top3.jpg" />
+    <Image Include="rainbow_texture.png" />
+    <Image Include="texture1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shader_s.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -147,5 +167,6 @@
     <Error Condition="!Exists('packages\glm.1.0.1\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glm.1.0.1\build\native\glm.targets'))" />
     <Error Condition="!Exists('packages\glfw.3.4.0\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glfw.3.4.0\build\native\glfw.targets'))" />
     <Error Condition="!Exists('packages\glew.v140.1.12.0\build\native\glew.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glew.v140.1.12.0\build\native\glew.v140.targets'))" />
+    <Error Condition="!Exists('packages\soil.1.16.0\build\native\soil.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\soil.1.16.0\build\native\soil.props'))" />
   </Target>
 </Project>
