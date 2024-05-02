@@ -11,7 +11,6 @@
 #include<glm/gtc/type_ptr.hpp>
 #include<glm/gtx/transform.hpp>
 
-// 
 #include <stdio.h>
 #include <iostream>
 
@@ -75,19 +74,15 @@ int main()
         return 1;
     }
 
-
     // Массив вершин для треугольника
     GLfloat vertices[] = {
-       0.0f,  0.5f, 0.0f, // Вершина 
-       0.8f, 0.2f, 0.8f, // Цвет голуб
-      -0.5f, -0.5f, 0.0f, // Вершина 
-       0.2f, 0.2f, 0.2f, // Цвет
-       0.5f, -0.5f, 0.0f, // Вершина 
-       0.2f, 0.2f, 0.6f  // Цвет 
+       0.0f,  0.5f, 0.0f,
+       0.1f, 0.7f, 0.3f, 
+      -0.5f, -0.5f, 0.0f, 
+       0.3f, 0.2f, 0.5f, 
+       0.5f, -0.5f, 0.0f,
+       0.3f, 0.1f, 0.5f  
     };
-
-
-
 
     // Создаем буфер вершин и связываем его
     GLuint vertexBuffer;
@@ -110,7 +105,6 @@ int main()
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
 
-
     // Связываем атрибуты вершин с буфером вершин
     GLint posAttrib = glGetAttribLocation(shaderProgram, "aPos");
     glEnableVertexAttribArray(posAttrib);
@@ -130,9 +124,7 @@ int main()
 
         glUseProgram(shaderProgram);
 
-        glm::mat4  model(1.0f);
-        //glm::mat4 rotation = glm::rotate(glm::radians(30.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-
+        glm::mat4 model(1.0f);
         model = glm::translate(model, glm::vec3(0.3f, -0.3f, 0.0f));
         model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
         GLuint rotationLoc = glGetUniformLocation(shaderProgram, "rotation");
@@ -158,15 +150,3 @@ int main()
 
     return 0;
 }
-
-
-
-//while (!glfwWindowShouldClose(window)) {
-    //    // очищаем экран
-    //    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-    //    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //    // обновить другие события, такие как обработка ввода
-    //    glfwPollEvents();
-    //    // поместите то, что мы рисовали, на дисплей
-    //    glfwSwapBuffers(window);
-    //}
