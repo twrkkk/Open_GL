@@ -141,13 +141,12 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="rainbow.jpg" />
-    <Image Include="texture1.png" />
-    <Image Include="texture2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="shader_s.h" />
     <ClInclude Include="stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="cat.png" />
+    <Image Include="cat_hair.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

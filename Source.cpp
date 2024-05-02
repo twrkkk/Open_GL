@@ -6,23 +6,22 @@
 #include <soil.h>
 #include "shader_s.h"
 #include "stb_image.h"
-//----------------------------------------------------------------
+
 float vertices[] = {
-	0.5f,  0.5f,  0.0f,		1.0f,0.0f, 0.0f,		 0.0f, 0.0f,
+	0.5f,  0.5f,  0.0f,		1.0f, 0.0f, 0.0f,		 0.0f, 0.0f,
 	0.5f, -0.5f,  0.0f,		0.0f, 1.0f, 0.0f,		 0.0f, 1.0f,
 	-0.5f, -0.5f,  0.0f,	0.0f, 0.0f,  1.0f,		 1.0f, 1.0f,
 	-0.5f, 0.5f,  0.0f,		1.0f, 1.0f,  0.0f,		 1.0f, 0.0f,
 };
+
 unsigned int indices[] =
 {
 	0,1,3,
 	1,2,3
 };
-//----------------------------------------------------------------
 
 int main()
 {
-	//----------------------------------------------------------------
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
 		return 1;
@@ -36,18 +35,14 @@ int main()
 	}
 	glfwMakeContextCurrent(window);
 
-
 	glewExperimental = GL_TRUE;
 	glewInit();
-
 
 	const GLubyte* renderer = glGetString(GL_RENDERER);
 	const GLubyte* version = glGetString(GL_VERSION);
 	printf("Renderer: %s\n", renderer);
 	printf("OpenGL version supported %s\n", version);
 
-
-	//----------------------------------------------------------------
 	GLuint VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -80,7 +75,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 
 	int width, height;
-	unsigned char* data = SOIL_load_image("rainbow.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* data = SOIL_load_image("texture1.png", &width, &height, 0, SOIL_LOAD_RGB);
 
 	if (data)
 	{
