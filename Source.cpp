@@ -88,9 +88,6 @@ int main()
        0.2f, 0.2f, 0.6f
     };
 
-
-
-
     // Создаем буфер вершин и связываем его
     GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
@@ -132,20 +129,13 @@ int main()
 
         glUseProgram(shaderProgram);
 
-
-        //glm::mat4 rotation = glm::rotate(glm::radians(30.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-
-        /*model = glm::translate(model, glm::vec3(0.3f, -0.3f, 0.0f));
-        model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-        GLuint rotationLoc = glGetUniformLocation(shaderProgram, "rotation");
-        glUniformMatrix4fv(rotationLoc, 1, GL_FALSE, &model[0][0]);*/
-
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
         glm::mat4 view = glm::lookAt(
             glm::vec3(-2.0f, 1.0f, -4.0f),
             glm::vec3(0.0f, 0.0f, 0.0f),
-            glm::vec3(0.0f, 1.0f, 0.0f));
-        glm::mat4  model(1.0f);
+            glm::vec3(0.0f, 1.0f, 0.0f)
+        );
+        glm::mat4 model(1.0f);
 
         glm::mat4 mvp = projection * view * model;
 
@@ -172,15 +162,3 @@ int main()
 
     return 0;
 }
-
-
-
-//while (!glfwWindowShouldClose(window)) {
-    //    // очищаем экран
-    //    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-    //    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //    // обновить другие события, такие как обработка ввода
-    //    glfwPollEvents();
-    //    // поместите то, что мы рисовали, на дисплей
-    //    glfwSwapBuffers(window);
-    //}
