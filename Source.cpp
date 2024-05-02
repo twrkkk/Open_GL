@@ -39,7 +39,6 @@ out vec4 FragColor;
 
 void main()
 {
-	FragColor = vec4(0.4f, 0.1f, 0.5f, 1.0f);
 	FragColor = vec4(color, 1.0f);
 }
 )";
@@ -50,7 +49,6 @@ in vec3 color;
 out vec4 FragColor;
 void main()
 {
-	FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);
 	FragColor = vec4(color, 1.0f);
 }
 )";
@@ -79,21 +77,9 @@ int main()
 	printf("Renderer: %s\n", renderer);
 	printf("OpenGL version supported %s\n", version);
 
-	/* tell GL to only draw onto a pixel if the shape is closer to the viewer
-	glEnable(GL_DEPTH_TEST); // enable depth-testing
-	glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
-
-	/* OTHER STUFF GOES HERE NEXT */
-
-	// close GL context and any other GLFW resources
-	//glfwTerminate();
-
-
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
 	unsigned int fragmenShaderFirst = glCreateShader(GL_FRAGMENT_SHADER);
 	unsigned int fragmenShaderSecond = glCreateShader(GL_FRAGMENT_SHADER);
-
 	unsigned int shaderProgramFirst = glCreateProgram();
 	unsigned int shaderProgramSecond = glCreateProgram();
 
@@ -106,11 +92,9 @@ int main()
 	glShaderSource(fragmenShaderSecond, 1, &fragmentShader2Source, NULL);
 	glCompileShader(fragmenShaderSecond);
 
-
 	glAttachShader(shaderProgramFirst, vertexShader);
 	glAttachShader(shaderProgramFirst, fragmenShaderFirst);
 	glLinkProgram(shaderProgramFirst);
-
 
 	glAttachShader(shaderProgramSecond, vertexShader);
 	glAttachShader(shaderProgramSecond, fragmenShaderSecond);
@@ -118,8 +102,8 @@ int main()
 
 	float firstTriangle[] = {
 
-		-0.9f, -0.5f, 0.0f,  1.0f, 0.0f, 1.0f,
-		-0.0f, -0.5f, 0.0f,  0.0f, 1.0f, 1.0f,
+		-0.9f, -0.5f, 0.0f,  0.0f, 0.01f, 0.84f,
+		-0.0f, -0.5f, 0.0f,  0.0f, 0.84f, 0.06f,
 		-0.45f, 0.5f, 0.0f,  0.0f, 0.0f, 0.0f
 	};
 	float secondTriangle[] = {
@@ -128,20 +112,6 @@ int main()
 		0.9f, -0.5f, 0.0f,  0.2f, 0.0f, 1.0f,
 		0.45f, 0.5f, 0.0f,  1.0f, 0.0f, 1.0f
 	};
-
-
-	/*
-	float firstTriangle[] = {
-		-0.9f, -0.5f,  0.0f,
-		-0.0f, -0.5f,  0.0f,
-		-0.45f, 0.5f,  0.0f
-	};
-	float secondTriangle[] = {
-		0.0f, -0.5f,  0.0f,
-		0.9f, -0.5f,  0.0f,
-		0.45f, 0.5f,  0.0f
-	};
-	*/
 
 	unsigned int VBOs[2], VAOs[2];
 	glGenVertexArrays(2, VAOs);
@@ -169,20 +139,10 @@ int main()
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
 		glUseProgram(shaderProgramFirst);
 		glBindVertexArray(VAOs[0]);
 
-		/*
-		glm::mat4  model(1.0f);
-		//model = glm::translate(model, glm::vec3(0.3f, -0.3f, 0.0f));
-		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		GLuint rotationLoc = glGetUniformLocation(shaderProgramFirst, "rotation");
-		glUniformMatrix4fv(rotationLoc, 1, GL_FALSE, &model[0][0]);
-		*/
-
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-
 
 		glUseProgram(shaderProgramSecond);
 		glBindVertexArray(VAOs[1]);
@@ -190,7 +150,6 @@ int main()
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-
 	}
 
 	glDeleteVertexArrays(2, VAOs);
@@ -200,36 +159,3 @@ int main()
 
 	return 0;
 }
-
-
-
-
-
-//while (!glfwWindowShouldClose(window)) {
-	//    // очищаем экран
-	//    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//    // обновить другие события, такие как обработка ввода
-	//    glfwPollEvents();
-	//    // поместите то, что мы рисовали, на дисплей
-	//    glfwSwapBuffers(window);
-	//}
-/*
-const char* vertexShaderSource = R"(
-#version 330 core
-
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aColor;
-
-out vec3 color;
-
-uniform mat4 rotation;
-
-void main()
-{
-	gl_Position = rotation * vec4(aPos, 1.0);
-	color = aColor;
-}
-
-)";
-*/
