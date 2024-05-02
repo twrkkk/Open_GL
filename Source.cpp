@@ -19,9 +19,9 @@ static const GLfloat g_vertex_buffer_data[] = {
 			-0.5f,-0.5f,-0.5f, // Треугольник 1 : начало
 			-0.5f,-0.5f, 0.5f,
 			-0.5f, 0.5f, 0.5f, // Треугольник 1 : конец
-			 0.5f, 0.5f,-0.5f, // Треугольник 2 : начало
+			 0.5f, 0.5f,-0.5f,
 			-0.5f,-0.5f,-0.5f,
-			-0.5f, 0.5f,-0.5f, // Треугольник 2 : конец
+			-0.5f, 0.5f,-0.5f,
 			 0.5f,-0.5f, 0.5f,
 			-0.5f,-0.5f,-0.5f,
 			 0.5,-0.5f,-0.5f,
@@ -93,11 +93,9 @@ static const GLfloat g_color_buffer_data[] = {
 	0.820f,  0.883f,  0.371f,
 	0.982f,  0.099f,  0.879f
 };
-//----------------------------------------------------------------
 
 int main()
 {
-	//----------------------------------------------------------------
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
 		return 1;
@@ -121,7 +119,6 @@ int main()
 	printf("Renderer: %s\n", renderer);
 	printf("OpenGL version supported %s\n", version);
 
-	//=================================================================
 	GLuint vertex_array_id;
 	glGenVertexArrays(1, &vertex_array_id);
 	glBindVertexArray(vertex_array_id);
@@ -143,44 +140,11 @@ int main()
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-	//=================================================================
-	//----------------------------------------------------------------
-
-	/*
-	// textures
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	int width, height, nChannels;
-	unsigned char* data = SOIL_load_image("rainbow_texture.png", &width, &height, 0, SOIL_LOAD_RGB);
-
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-	}
-	else
-	{
-		std::cout << "texture error\n";
-	}
-	SOIL_free_image_data(data);
-	*/
-
 
 	Shader ourShader("vertexshader.vs", "fragmentshader.fs");
 
-	//----------------------------------------------------------------
 
 	while (!glfwWindowShouldClose(window)) {
-		//================================================================
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 		glm::mat4 view = glm::lookAt(
 			glm::vec3(4.0f, 3.0f, -3.0f),
@@ -192,28 +156,21 @@ int main()
 
 		GLuint mvpLoc = glGetUniformLocation(ourShader.ID, "mvp");
 		glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, &mvp[0][0]);
-		//================================================================
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//glBindTexture(GL_TEXTURE_2D, texture);
-
 
 		ourShader.use();
 		glBindVertexArray(vertex_array_id);
 		glEnable(GL_DEPTH_TEST);
 		GLuint colorLoc = glGetUniformLocation(ourShader.ID, "inputColor");
 
-		glUniform3f(colorLoc, 1.0f, 0.0f, 0.0f); // Например, красный цвет
-
+		glUniform3f(colorLoc, 1.0f, 0.0f, 0.0f);
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-
 
 		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
 
-	//----------------------------------------------------------------
 	return 0;
 }
