@@ -100,7 +100,6 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 
-
 	data = SOIL_load_image("texture2.png", &width, &height, 0, SOIL_LOAD_RGB);
 
 	if (data)
@@ -115,11 +114,7 @@ int main()
 	}
 	SOIL_free_image_data(data);
 
-
 	Shader ourShader("vertexshader.vs", "fragmentshader.fs");
-
-
-	//----------------------------------------------------------------
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -143,6 +138,5 @@ int main()
 		glfwSwapBuffers(window);
 	}
 
-	//----------------------------------------------------------------
 	return 0;
 }
