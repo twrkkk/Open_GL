@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 
 #include<GL/glew.h>
@@ -41,7 +39,6 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 int main()
 {
 	// glfw: инициализация и конфигурирование
-//	glfwInit();
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
 		return 1;
@@ -49,8 +46,6 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-
 
 	// glfw: создание окна
 	GLFWwindow* window = glfwCreateWindow(1100, 800, "Hello Cube", nullptr, 0);
@@ -67,10 +62,7 @@ int main()
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
-
-	// Сообщаем GLFW, чтобы он захватил наш курсор
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Конфигурирование глобального состояния OpenGL
 	glEnable(GL_DEPTH_TEST);
@@ -142,19 +134,17 @@ int main()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	// 2. Настраиваем VAO света (VBO остается неизменным; вершины те же и для светового объекта, который также является 3D-кубом)
+	// 2. Настраиваем VAO света (VBO остается неизменным; вершины те же и для светового объекта, который также является 3D кубом)
 	unsigned int lightVAO;
 	glGenVertexArrays(1, &lightVAO);
 	glBindVertexArray(lightVAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	// Обратите внимание, что мы обновляем шаг атрибута положения лампы, чтобы отразить обновленные данные буфера
+	//обновляем шаг атрибута положения лампы, чтобы отразить обновленные данные буфера
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-
-	// Цикл рендеринга
 	while (!glfwWindowShouldClose(window))
 	{
 		// Логическая часть работы со временем для каждого кадра
@@ -237,11 +227,8 @@ void processInput(GLFWwindow* window)
 // glfw: всякий раз, когда изменяются размеры окна (пользователем или операционной системой), вызывается данная callback-функция
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// Убеждаемся, что окно просмотра соответствует новым размерам окна.
-	// Обратите внимание, ширина и высота будут значительно больше, чем указано, на Retina-дисплеях
 	glViewport(0, 0, width, height);
 }
-
 
 // glfw: всякий раз, когда перемещается мышь, вызывается данная callback-функция
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
