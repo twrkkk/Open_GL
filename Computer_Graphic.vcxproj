@@ -141,14 +141,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="cubeTex\back1.jpg" />
-    <Image Include="cubeTex\bottom2.jpg" />
-    <Image Include="cubeTex\front0.jpg" />
-    <Image Include="cubeTex\left4.jpg" />
-    <Image Include="cubeTex\right5.jpg" />
-    <Image Include="cubeTex\top3.jpg" />
-    <Image Include="rainbow_texture.png" />
-    <Image Include="texture1.png" />
+    <Image Include="cat.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader_s.h" />
