@@ -9,6 +9,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "stb_image.h"
 using namespace glm;
 using glm::mat4;
 using glm::vec3;
@@ -130,7 +131,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height, nChannels;
-	unsigned char* data = ("cat.png", &width, &height, &nChannels, SOIL_LOAD_RGB);
+	unsigned char* data = stbi_load("cat.png", &width, &height, &nChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -141,8 +142,6 @@ int main()
 	{
 		std::cout << "texture error\n";
 	}
-	SOIL_free_image_data(data);
-
 
 	Shader ourShader("cubeTextSh.vs", "cubeTextSh.fs");
 	while (!glfwWindowShouldClose(window)) {
