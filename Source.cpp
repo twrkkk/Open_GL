@@ -3,7 +3,6 @@
 #include <GLFW/glfw3.h> 
 #include <stdio.h>
 #include <iostream>
-#include <soil.h>
 #include "shader_s.h"
 #include "stb_image.h"
 
@@ -74,12 +73,12 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 
-	int width, height;
-	unsigned char* data = SOIL_load_image("texture1.png", &width, &height, 0, SOIL_LOAD_RGB);
+	int width, height, channels;
+	unsigned char* data = stbi_load("texture2.png", &width, &height, &channels, 0);
 
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 	}
@@ -87,8 +86,6 @@ int main()
 	{
 		std::cout << "texture error\n";
 	}
-	SOIL_free_image_data(data);
-
 	// texture 2
 	unsigned int texture2;
 	glGenTextures(1, &texture2);
@@ -100,11 +97,11 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 
-	data = SOIL_load_image("texture2.png", &width, &height, 0, SOIL_LOAD_RGB);
+	data = stbi_load("texture1.png", &width, &height, &channels, 0);
 
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 	}
@@ -112,7 +109,6 @@ int main()
 	{
 		std::cout << "texture error\n";
 	}
-	SOIL_free_image_data(data);
 
 	Shader ourShader("vertexshader.vs", "fragmentshader.fs");
 

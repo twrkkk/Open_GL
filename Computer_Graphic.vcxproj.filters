@@ -21,4 +21,9 @@
   <ItemGroup>
     <Library Include="dependencies\glut\glut32.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
