@@ -86,6 +86,8 @@ int main()
 	{
 		std::cout << "texture error\n";
 	}
+
+	stbi_image_free(data);
 	// texture 2
 	unsigned int texture2;
 	glGenTextures(1, &texture2);
@@ -109,6 +111,8 @@ int main()
 	{
 		std::cout << "texture error\n";
 	}
+
+	stbi_image_free(data);
 
 	Shader ourShader("vertexshader.vs", "fragmentshader.fs");
 
