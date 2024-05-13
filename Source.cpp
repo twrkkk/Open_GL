@@ -2,7 +2,6 @@
 #include<glut.h>
 #include <GLFW/glfw3.h> // GLFW helper library
 #include <stdio.h>
-#include <soil.h>
 #include <iostream>
 #include "shader_s.h"
 #include <glm/glm.hpp>
@@ -131,7 +130,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height, nChannels;
-	unsigned char* data = SOIL_load_image("cat.png", &width, &height, &nChannels, SOIL_LOAD_RGB);
+	unsigned char* data = ("cat.png", &width, &height, &nChannels, SOIL_LOAD_RGB);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
