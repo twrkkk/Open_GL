@@ -11,7 +11,6 @@
 #include<glm/gtc/type_ptr.hpp>
 #include<glm/gtx/transform.hpp>
 
-#include <soil.h>
 #include "shader_s.h"
 
 
